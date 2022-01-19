@@ -1,25 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import Home from './views/Home';
+import Redirect from './views/Redirect';
+import Color from './views/Color';
+
 
 function App() {
+
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <BrowserRouter>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <Link to="/">Home</Link>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Switch>
+          {/* 1.  WELCOME heading */}
+          <Route exact path="/">
+            <Home />
+          </Route>
+          {/* 2 & 3.  Display the Number/Word */}
+          <Route exact path="/:query">
+            <Redirect />
+          </Route>
+          {/* 4. localhost:3000/hello/blue/red: This should display word in {color1} text with a {color2} background.*/}
+          <Route exact path="/:word/:color1/:color2">
+            <Color />
+          </Route>
+
+        </Switch>
+
+      </BrowserRouter>
+
     </div>
   );
 }
+
 
 export default App;
